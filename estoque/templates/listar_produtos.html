@@ -1,0 +1,49 @@
+{% extends 'base_produto.html'%}
+{% load static %}
+{% block 'head' %}
+<title>Produto</title>
+{% endblock %}
+
+{% block 'body' %}
+
+<div class="content">
+
+    <h1>Produtos</h1>
+
+    <div class="funcoes">
+        <a href="{% url 'adicionar_produto' %}">Adicionar Produto</a>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" id="buscaInput" placeholder="Procurar produto pelo nome...">
+        <button onclick="buscaProduto()">Buscar</button>
+    </div>
+
+
+    <table class="tabela">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>QTD.</th>
+                <th>Preço</th>
+                <th>Ações</th>
+
+            </tr>
+        </thead>
+        <tbody id="produto">
+            {% for produto in produtos %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ produto.nome }}</td>
+                <td>{{ produto.quantidade }}</td>
+                <th>{{ produto.preco }}</th>
+                <td>
+                    <a href="{% url 'editar_produtos' produto.pk %}">Editar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
